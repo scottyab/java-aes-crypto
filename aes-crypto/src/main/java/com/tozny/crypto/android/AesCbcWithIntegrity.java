@@ -24,6 +24,11 @@
 
 package com.tozny.crypto.android;
 
+import android.os.Build;
+import android.os.Process;
+import android.util.Base64;
+import android.util.Log;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -52,11 +57,6 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
-
-import android.os.Build;
-import android.os.Process;
-import android.util.Base64;
-import android.util.Log;
 
 /**
  * Simple library for the "right" defaults for AES key generation, encryption,
@@ -89,7 +89,7 @@ public class AesCbcWithIntegrity {
      * storage. Sister function of keys.
      *
      * @param keys The combined aes and hmac keys
-     * @return a base 64 encoded AES string & hmac key as base64(aesKey) : base64(hmacKey)
+     * @return a base 64 encoded AES string and hmac key as base64(aesKey) : base64(hmacKey)
      */
     public static String keyString(SecretKeys keys) {
         return keys.toString();
@@ -100,7 +100,7 @@ public class AesCbcWithIntegrity {
      * key. It's not random or a PBE key.
      *
      * @param keysStr a base64 encoded AES key / hmac key as base64(aesKey) : base64(hmacKey).
-     * @return an AES & HMAC key set suitable for other functions.
+     * @return an AES and HMAC key set suitable for other functions.
      */
     public static SecretKeys keys(String keysStr) throws InvalidKeyException {
         String[] keysArr = keysStr.split(":");
@@ -125,11 +125,11 @@ public class AesCbcWithIntegrity {
     }
 
     /**
-     * A function that generates random AES & HMAC keys and prints out exceptions but
+     * A function that generates random AES and HMAC keys and prints out exceptions but
      * doesn't throw them since none should be encountered. If they are
      * encountered, the return value is null.
      *
-     * @return The AES & HMAC keys.
+     * @return The AES and HMAC keys.
      * @throws GeneralSecurityException if AES is not implemented on this system,
      *                                  or a suitable RNG is not available
      */
@@ -149,7 +149,7 @@ public class AesCbcWithIntegrity {
     }
 
     /**
-     * A function that generates password-based AES & HMAC keys. It prints out exceptions but
+     * A function that generates password-based AES and HMAC keys. It prints out exceptions but
      * doesn't throw them since none should be encountered. If they are
      * encountered, the return value is null.
      *
@@ -209,9 +209,9 @@ public class AesCbcWithIntegrity {
      * By default the keys are generated with 10000 iterations. Use {@link #generateKeyFromPassword(String, String,
      * int)} if you want to use different iteration count.
      *
-     * @param password The password to derive the AES/HMAC keys from.
+     * @param password The password to derive the AES/HMAC keys from
      * @param salt A string version of the salt; base64 encoded.
-     * @return The AES & HMAC keys.
+     * @return The AES and HMAC keys.
      * @throws GeneralSecurityException
      */
     public static SecretKeys generateKeyFromPassword(String password, String salt) throws GeneralSecurityException {
@@ -283,7 +283,7 @@ public class AesCbcWithIntegrity {
      *
      * @param plaintext The text that will be encrypted, which
      *                  will be serialized with UTF-8
-     * @param secretKeys The AES & HMAC keys with which to encrypt
+     * @param secretKeys The AES and HMAC keys with which to encrypt
      * @return a tuple of the IV, ciphertext, mac
      * @throws GeneralSecurityException if AES is not implemented on this system
      * @throws UnsupportedEncodingException if UTF-8 is not supported in this system
@@ -298,7 +298,7 @@ public class AesCbcWithIntegrity {
      * a hashed MAC, which is contained in the CipherTextIvMac class.
      *
      * @param plaintext The bytes that will be encrypted
-     * @param secretKeys The AES & HMAC keys with which to encrypt
+     * @param secretKeys The AES and HMAC keys with which to encrypt
      * @return a tuple of the IV, ciphertext, mac
      * @throws GeneralSecurityException if AES is not implemented on this system
      * @throws UnsupportedEncodingException if the specified encoding is invalid
@@ -313,7 +313,7 @@ public class AesCbcWithIntegrity {
      * a hashed MAC, which is contained in the CipherTextIvMac class.
      *
      * @param plaintext The text that will be encrypted
-     * @param secretKeys The combined AES & HMAC keys with which to encrypt
+     * @param secretKeys The combined AES and HMAC keys with which to encrypt
      * @return a tuple of the IV, ciphertext, mac
      * @throws GeneralSecurityException if AES is not implemented on this system
      */
@@ -360,7 +360,7 @@ public class AesCbcWithIntegrity {
      * AES CBC decrypt.
      *
      * @param civ The cipher text, IV, and mac
-     * @param secretKeys The AES & HMAC keys
+     * @param secretKeys The AES and HMAC keys
      * @param encoding The string encoding to use to decode the bytes after decryption
      * @return A string derived from the decrypted bytes (not base64 encoded)
      * @throws GeneralSecurityException if AES is not implemented on this system
@@ -375,7 +375,7 @@ public class AesCbcWithIntegrity {
      * AES CBC decrypt.
      *
      * @param civ The cipher text, IV, and mac
-     * @param secretKeys The AES & HMAC keys
+     * @param secretKeys The AES and HMAC keys
      * @return A string derived from the decrypted bytes, which are interpreted
      *         as a UTF-8 String
      * @throws GeneralSecurityException if AES is not implemented on this system
@@ -390,7 +390,7 @@ public class AesCbcWithIntegrity {
      * AES CBC decrypt.
      *
      * @param civ the cipher text, iv, and mac
-     * @param secretKeys the AES & HMAC keys
+     * @param secretKeys the AES and HMAC keys
      * @return The raw decrypted bytes
      * @throws GeneralSecurityException if MACs don't match or AES is not implemented
      */
@@ -419,7 +419,7 @@ public class AesCbcWithIntegrity {
      * Generate the mac based on HMAC_ALGORITHM
      * @param integrityKey The key used for hmac
      * @param byteCipherText the cipher text
-     * @return A byte array of the HMAC for the given key & ciphertext
+     * @return A byte array of the HMAC for the given key and ciphertext
      * @throws NoSuchAlgorithmException
      * @throws InvalidKeyException
      */
