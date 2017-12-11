@@ -153,12 +153,13 @@ public class AesCbcWithIntegrity {
      * doesn't throw them since none should be encountered. If they are
      * encountered, the return value is null.
      *
-     * By default the keys are generated with 10000 iterations. Use {@link #generateKeyFromPassword(String, byte[],
-     * int)} if you want to use different iteration count.
+     * By default the keys are generated with 10000 iterations. Use #generateKeyFromPassword
+     * (String, byte[],
+     * int) if you want to use different iteration count.
      *
      * @param password The password to derive the keys from.
      * @param salt The salt for the keys derived from the {@code password}.
-     * @return The AES & HMAC keys.
+     * @return The AES and HMAC keys.
      * @throws GeneralSecurityException if AES is not implemented on this system,
      *                                  or a suitable RNG is not available
      */
@@ -167,14 +168,14 @@ public class AesCbcWithIntegrity {
     }
 
     /**
-     * A function that generates password-based AES & HMAC keys. It prints out exceptions but
+     * A function that generates password-based AES and HMAC keys. It prints out exceptions but
      * doesn't throw them since none should be encountered. If they are
      * encountered, the return value is null.
      *
      * @param password The password to derive the keys from.
      * @param salt The salt for the keys derived from the {@code password}.
      * @param iterationCount The iteration count for the keys generation.
-     * @return The AES & HMAC keys.
+     * @return The AES and HMAC keys.
      * @throws GeneralSecurityException if AES is not implemented on this system,
      *                                  or a suitable RNG is not available
      */
@@ -203,30 +204,30 @@ public class AesCbcWithIntegrity {
     }
 
     /**
-     * A function that generates password-based AES & HMAC keys. See {@link #generateKeyFromPassword(String, byte[])}
+     * A function that generates password-based AES and HMAC keys. See #generateKeyFromPassword
+     * (String, byte[])
      * for more details.
      *
-     * By default the keys are generated with 10000 iterations. Use {@link #generateKeyFromPassword(String, String,
-     * int)} if you want to use different iteration count.
+     * By default the keys are generated with 10000 iterations. Use #generateKeyFromPassword
+     * (String, String,
+     * int) if you want to use different iteration count.
      *
      * @param password The password to derive the AES/HMAC keys from
      * @param salt A string version of the salt; base64 encoded.
      * @return The AES and HMAC keys.
-     * @throws GeneralSecurityException
      */
     public static SecretKeys generateKeyFromPassword(String password, String salt) throws GeneralSecurityException {
         return generateKeyFromPassword(password, salt, PBE_ITERATION_COUNT);
     }
 
     /**
-     * A function that generates password-based AES & HMAC keys. See
-     * {@link #generateKeyFromPassword(String, byte[], int)} for more details.
+     * A function that generates password-based AES and HMAC keys. See
+     * generateKeyFromPassword(String, byte[], int) for more details.
      *
      * @param password The password to derive the AES/HMAC keys from
      * @param salt A string version of the salt; base64 encoded.
      * @param iterationCount The iteration count for the key generation.
-     * @return The AES & HMAC keys.
-     * @throws GeneralSecurityException
+     * @return The AES and HMAC keys.
      */
     public static SecretKeys generateKeyFromPassword(String password, String salt, int iterationCount)
             throws GeneralSecurityException {
@@ -420,8 +421,6 @@ public class AesCbcWithIntegrity {
      * @param integrityKey The key used for hmac
      * @param byteCipherText the cipher text
      * @return A byte array of the HMAC for the given key and ciphertext
-     * @throws NoSuchAlgorithmException
-     * @throws InvalidKeyException
      */
     public static byte[] generateMac(byte[] byteCipherText, SecretKey integrityKey) throws NoSuchAlgorithmException, InvalidKeyException {
         //Now compute the mac for later integrity checking
@@ -503,8 +502,6 @@ public class AesCbcWithIntegrity {
 
     /**
      * Simple constant-time equality of two byte arrays. Used for security to avoid timing attacks.
-     * @param a
-     * @param b
      * @return true iff the arrays are exactly equal.
      */
     public static boolean constantTimeEq(byte[] a, byte[] b) {
