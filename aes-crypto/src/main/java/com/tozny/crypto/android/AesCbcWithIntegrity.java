@@ -340,7 +340,7 @@ public class AesCbcWithIntegrity {
      * Ensures that the PRNG is fixed. Should be used before generating any keys.
      * Will only run once, and every subsequent call should return immediately.
      */
-    private static void fixPrng() {
+    public static void fixPrng() {
         if (!prngFixed.get()) {
             synchronized (PrngFixes.class) {
                 if (!prngFixed.get()) {
